@@ -18,58 +18,32 @@ public class Main {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {
         SudokuGenerator sudokuGenerator = new SudokuGenerator();
-        printBoard(sudokuGenerator.generateSudoku());
+
+        long start = System.currentTimeMillis();
+        int[][] solvedSudokou = sudokuGenerator.generateSudoku();
+        System.out.println("Time it took to generate: " + (System.currentTimeMillis() - start));
+
+        printBoard(solvedSudokou);
+
+
+        CellRemover cellRemover = new CellRemover();
+        int[][] puzzle = cellRemover.removeCells(copyBoard(solvedSudokou), 35);
+
+        printBoard(puzzle);
+    }
+
+    private static int[][] copyBoard(int[][] board) {
+        int[][] newBoard = new int[SIZE][SIZE];
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                newBoard[row][col] = board[row][col];
+            }
+        }
+        return newBoard;
     }
 }
-/*
-
-1 2 3    4 5 6    7 8 9
-. . .    . . .    . . .
-. . .    . . .    . . .
-
-. . .    . . .    . . .
-. . .    . . .    . . .
-. . .    . . .    . . .
-
-. . .    . . .    . . .
-. . .    . . .    . . .
-. . .    . . .    . . .
-
-
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-
-
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-1 2 3 4 5 6 7 8 9
-
-
- */

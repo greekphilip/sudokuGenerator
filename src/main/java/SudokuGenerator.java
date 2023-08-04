@@ -111,8 +111,9 @@ public class SudokuGenerator {
         HashSet<Integer> selectionPool = new HashSet<>(rowsRandomPool.get(row));
         selectionPool.retainAll(colsRandomPool.get(col));
         selectionPool.retainAll(boxesRandomPool.get(boxIndex(row, col)));
+        selectionPool.remove(revertedEntry);
 
-        if (selectionPool.isEmpty() || (selectionPool.size() == 1 && selectionPool.contains(revertedEntry))) {
+        if (selectionPool.isEmpty()) {
             revertedEntry = revert(board, new Pair<>(row, col));
             return findNumber(board, revertPoint.getKey(), revertPoint.getValue(), revertedEntry);
         }
@@ -123,9 +124,6 @@ public class SudokuGenerator {
             int i = 0;
             for (Integer entry : selectionPool) {
                 if (i == randomIndex) {
-                    if (entry == revertedEntry) {
-                        break;
-                    }
                     rowsRandomPool.get(row).remove(entry);
                     colsRandomPool.get(col).remove(entry);
                     boxesRandomPool.get(boxIndex(row, col)).remove(entry);
@@ -150,14 +148,6 @@ public class SudokuGenerator {
     }
 
 
-    private int[][] copyBoard(int[][] board) {
-        int[][] newBoard = new int[SIZE][SIZE];
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                newBoard[row][col] = board[row][col];
-            }
-        }
-        return newBoard;
-    }
+
 
 }
