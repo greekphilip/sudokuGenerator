@@ -54,8 +54,11 @@ public class CellRemover {
             int[][] copy = copyBoard(board);
             copy[row][col] = 0;
 
-            if (!verifyUniqueness(originalBoard, copy, 15)) {
+            if (!verifyUniqueness(originalBoard, copy, 10)) {
                 i--;
+                removalIndex[randomIndex] = removalIndex[poolSize - 1];
+                removalIndex[poolSize - 1] = temp;
+                poolSize--;
                 continue;
             }
 
@@ -71,9 +74,25 @@ public class CellRemover {
 
     private boolean verifyUniqueness(int[][] original, int[][] unsolved, int times) {
         for (int i = 0; i < times; i++) {
-            int[][] copy = copyBoard(unsolved);
-            sudokuSolver.solveSudoku(copy);
-            if (!Utils.compareBoards(original, copy)) {
+            int[][] copy1 = copyBoard(unsolved);
+            int[][] copy2 = copyBoard(unsolved);
+            int[][] copy3 = copyBoard(unsolved);
+            int[][] copy4 = copyBoard(unsolved);
+
+            sudokuSolver.solveSudokuRowWiseTopToBottom(copy1);
+            if (!Utils.compareBoards(original, copy1)) {
+                return false;
+            }
+            sudokuSolver.solveSudokuRowWiseBottomToTop(copy2);
+            if (!Utils.compareBoards(original, copy2)) {
+                return false;
+            }
+            sudokuSolver.solveSudokuColumnWiseTopToBottom(copy3);
+            if (!Utils.compareBoards(original, copy3)) {
+                return false;
+            }
+            sudokuSolver.solveSudokuColumnWiseBottomToTop(copy4);
+            if (!Utils.compareBoards(original, copy4)) {
                 return false;
             }
         }

@@ -47,14 +47,6 @@ public class Utils {
         return (i / 3) * 3 + j / 3;
     }
 
-    public static  int[] initializeArray(int size) {
-        int[] array = new int[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = 0;
-        }
-        return array;
-    }
-
     public static boolean isValidSudoku(int[][] board) {
         // SIZE would be 9 for a standard Sudoku
         int SIZE = 9;

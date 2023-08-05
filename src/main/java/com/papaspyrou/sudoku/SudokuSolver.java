@@ -69,6 +69,64 @@ public class SudokuSolver {
         return board;
     }
 
+    public int[][] solveSudokuRowWiseTopToBottom(int[][] board) {
+        initialize(board);
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (board[row][col] < 1 || board[row][col] > 9) {
+                    Pair<Integer, Integer> currentCell = findNumber(board, row, col);
+                    row = currentCell.getKey();
+                    col = currentCell.getValue();
+                }
+            }
+        }
+        return board;
+    }
+
+    public int[][] solveSudokuRowWiseBottomToTop(int[][] board) {
+        initialize(board);
+        for (int row = SIZE - 1; row >= 0; row--) {
+            for (int col = SIZE - 1; col >= 0; col--) {
+                if (board[row][col] < 1 || board[row][col] > 9) {
+                    Pair<Integer, Integer> currentCell = findNumber(board, row, col);
+                    row = currentCell.getKey();
+                    col = currentCell.getValue();
+                }
+            }
+        }
+        return board;
+    }
+
+    public int[][] solveSudokuColumnWiseTopToBottom(int[][] board) {
+        initialize(board);
+        for (int col = 0; col < SIZE; col++) {
+            for (int row = 0; row < SIZE; row++) {
+                if (board[row][col] < 1 || board[row][col] > 9) {
+                    Pair<Integer, Integer> currentCell = findNumber(board, row, col);
+                    row = currentCell.getKey();
+                    col = currentCell.getValue();
+                }
+            }
+        }
+        return board;
+    }
+
+
+    public int[][] solveSudokuColumnWiseBottomToTop(int[][] board) {
+        initialize(board);
+        for (int col = SIZE - 1; col >= 0; col--) {
+            for (int row = SIZE - 1; row >= 0; row--) {
+                if (board[row][col] < 1 || board[row][col] > 9) {
+                    Pair<Integer, Integer> currentCell = findNumber(board, row, col);
+                    row = currentCell.getKey();
+                    col = currentCell.getValue();
+                }
+            }
+        }
+        return board;
+    }
+
+
     private int revert(int[][] board) {
         Integer number;
         Pair<Integer, Integer> current = moves.peek();
