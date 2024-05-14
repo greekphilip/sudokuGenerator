@@ -19,6 +19,33 @@ public class Utils {
         System.out.println();
     }
 
+    public static void prettyPrint(int[][] board) {
+        if (board == null || board.length != 9 || board[0].length != 9) {
+            System.out.println("Invalid Sudoku board!");
+            return;
+        }
+
+        for (int row = 0; row < 9; row++) {
+            if (row % 3 == 0 && row != 0) {
+                System.out.println("- - - + - - - + - - -");
+            }
+
+            for (int col = 0; col < 9; col++) {
+                if (col % 3 == 0 && col != 0) {
+                    System.out.print("| ");
+                }
+
+                if (board[row][col] == 0) { // Assuming 0 means empty cell
+                    System.out.print(". ");
+                } else {
+                    System.out.print(board[row][col] + " ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
     public static int[][] copyBoard(int[][] board) {
         int[][] newBoard = new int[SIZE][SIZE];
         for (int row = 0; row < SIZE; row++) {

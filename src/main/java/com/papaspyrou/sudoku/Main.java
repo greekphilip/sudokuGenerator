@@ -25,13 +25,13 @@ public class Main {
 
         int[][] puzzle = sudokuGenerator.generateUnsolvedSudoku(copyBoard(solvedSudokou), 55);
 
-        printBoard(puzzle);
+        prettyPrint(puzzle);
 
 
         int[][] solvedPuzzle = sudokuSolver.solveSudoku(copyBoard(puzzle));
 
 
-        printBoard(solvedPuzzle);
+        prettyPrint(solvedPuzzle);
 
         System.out.println("Valid sudokou: " + isValidSudoku(solvedPuzzle));
 
